@@ -33,6 +33,14 @@ define(['core/view', 'backbone.babysitter'], function(View, ChildViewContainer){
 
 		},
 
+		/**
+		
+			TODO:
+			- if child view.options.el is defined need to make sure it is a child of parent view otherwise append
+		
+		**/
+		
+
 		_renderChildren: function(){
 
 			this.container.each(function(view){

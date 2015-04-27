@@ -165,7 +165,7 @@ define(['lodash', 'backbone', 'backbone.babysitter', 'core/view', 'core/containe
 
 					expect(view.$el.append).not.toHaveBeenCalled();
 
-					expect(view.el.getElementsByClassName('item-view-1').length).toBe(1);				
+					expect(view.el.getElementsByClassName('item-view-1').length).toBe(1);
 
 
 				});
@@ -184,7 +184,7 @@ define(['lodash', 'backbone', 'backbone.babysitter', 'core/view', 'core/containe
 
 					view.$el.append(childView.$el);
 
-					expect(view.$el.append).toHaveBeenCalledWith(childView.el);				
+					expect(view.$el.append).toHaveBeenCalledWith(childView.el);
 
 				});
 

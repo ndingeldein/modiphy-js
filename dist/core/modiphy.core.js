@@ -857,3 +857,5 @@ define('modiphy',['core'], function(M){
 
 	return M;
 });
+
+define("core/modiphy.core", function(){});
