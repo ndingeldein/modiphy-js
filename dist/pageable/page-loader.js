@@ -8,7 +8,7 @@ define(['lodash', 'jquery', 'backbone', 'modiphy', 'pageable/page'], function(_,
 		var defaults = {
 
 			jsonPath: 'json/json.php',
-			htmlPath: 'page/page.php'
+			htmlPath: 'layout/page/page.php'
 
 		};
 
@@ -20,33 +20,41 @@ define(['lodash', 'jquery', 'backbone', 'modiphy', 'pageable/page'], function(_,
 
 		load: function(page){
 
+			this._stopLoading();
+
 			this.deferreds = [];
 
 			this.deferreds.push( this.loadHTML( page ) );
 			this.deferreds.push( this.loadJSON( page ) );
 
 			return $.when.apply( $, this.deferreds ).done(function(html, json){
-				
-				page.get('content').html = html[0];
-				page.get('content').json = json[0];
+
+				page.set('content', {
+					html: html[1],
+					json: json[0]
+				});
 
 			});
 
 		},
 
 		loadHTML: function( page ){
+
+			var deferred = $.Deferred();
+
+			if(page.get('content').html){
+				return deferred.resolve([page, page.get('content').html]);
+			}
 			
 			//get current query params as object
 			//not sure how to test this
 			var params;
 			if(Backbone.history.fragment){
-				params = M.deparam(Backbone.history.fragment);
+				params = M.deparam.querystring(Backbone.history.fragment);
 			}else{
 				params = {};
 			}
-			console.log(Backbone.history.fragment);
-			console.log(params);
-			
+		
 			params.page = page.get('name');
 			params.layout = page.get('layout');
 			params.title = page.get('title');
@@ -54,17 +62,30 @@ define(['lodash', 'jquery', 'backbone', 'modiphy', 'pageable/page'], function(_,
 			params.page_id = page.get('id');
 			params.page_gallery_id = page.get('gallery_id');
 			params.url = document.URL;
-			return $.get( this.htmlPath, params );
+
+			$.get( this.htmlPath, params )
+				.done(function( data ){					
+					deferred.resolve(page, data);
+				})
+				.fail(deferred.reject);
+
+			return deferred;
 
 		},
 
 		loadJSON: function(page){
 
+			var deferred = $.Deferred();
+
+			if(page.get('content').json){
+				return deferred.resolve([page.get('content').json]);
+			}
+
 			//get current query params as object
 			//not sure how to test this
 			var params;
 			if(Backbone.history.fragment){
-				params = M.deparam(Backbone.history.fragment);
+				params = M.deparam.querystring(Backbone.history.fragment);
 			}else{
 				params = {};
 			}
@@ -76,9 +97,22 @@ define(['lodash', 'jquery', 'backbone', 'modiphy', 'pageable/page'], function(_,
 			params.page_id = page.get('id');
 			params.page_gallery_id = page.get('gallery_id');
 			params.url = document.URL;
-			
-			return $.get( this.jsonPath, params,'json');
 
+			$.get( this.jsonPath, params,'json')
+				.done(deferred.resolve)
+				.fail(deferred.reject);
+
+			return deferred;
+
+		},
+
+		_stopLoading: function(){
+			if(this.deferreds){
+				_.each(this.deferreds, function(deferred){
+					deferred.reject();
+				});
+				this.deferreds.length = 0;
+			}
 		}
 
 	});

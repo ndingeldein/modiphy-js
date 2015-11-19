@@ -8,7 +8,7 @@ define(['lodash', 'jquery', 'backbone', 'modiphy', 'pageable/page'], function(_,
 		var defaults = {
 
 			jsonPath: 'json/json.php',
-			htmlPath: 'page/page.php'
+			htmlPath: 'layout/page/page.php'
 
 		};
 
@@ -30,7 +30,7 @@ define(['lodash', 'jquery', 'backbone', 'modiphy', 'pageable/page'], function(_,
 			return $.when.apply( $, this.deferreds ).done(function(html, json){
 
 				page.set('content', {
-					html: html[0],
+					html: html[1],
 					json: json[0]
 				});
 
@@ -43,7 +43,7 @@ define(['lodash', 'jquery', 'backbone', 'modiphy', 'pageable/page'], function(_,
 			var deferred = $.Deferred();
 
 			if(page.get('content').html){
-				return deferred.resolve([page.get('content').html]);
+				return deferred.resolve([page, page.get('content').html]);
 			}
 			
 			//get current query params as object
@@ -61,10 +61,12 @@ define(['lodash', 'jquery', 'backbone', 'modiphy', 'pageable/page'], function(_,
 			params.type = page.get('type');
 			params.page_id = page.get('id');
 			params.page_gallery_id = page.get('gallery_id');
-			params.url = document.URL;			
+			params.url = document.URL;
 
 			$.get( this.htmlPath, params )
-				.done(deferred.resolve)
+				.done(function( data ){					
+					deferred.resolve(page, data);
+				})
 				.fail(deferred.reject);
 
 			return deferred;
@@ -94,7 +96,7 @@ define(['lodash', 'jquery', 'backbone', 'modiphy', 'pageable/page'], function(_,
 			params.type = page.get('type');
 			params.page_id = page.get('id');
 			params.page_gallery_id = page.get('gallery_id');
-			params.url = document.URL;			
+			params.url = document.URL;
 
 			$.get( this.jsonPath, params,'json')
 				.done(deferred.resolve)

@@ -27,9 +27,9 @@ define(['backbone', 'jquery', 'modiphy', 'pageable/page-loader', 'pageable/page'
 
 			describe('"htmlPath"', function(){
 
-				it('should default to "page/page.php"', function(){
+				it('should default to "layout/page/page.php"', function(){
 
-					expect(loader.htmlPath).toBe('page/page.php');
+					expect(loader.htmlPath).toBe('layout/page/page.php');
 
 				});
 
@@ -101,7 +101,7 @@ define(['backbone', 'jquery', 'modiphy', 'pageable/page-loader', 'pageable/page'
 
 				it('should use jsonPath and pass page properties and pass the current url', function(){
 
-					spyOn($, 'get').and.callThrough();					
+					spyOn($, 'get').and.callThrough();
 
 					var params;
 					if(Backbone.history.fragment){
@@ -127,6 +127,8 @@ define(['backbone', 'jquery', 'modiphy', 'pageable/page-loader', 'pageable/page'
 				it('should load the page related html', function(done){
 
 					loader.load(page).done(function(){
+
+						console.log(page.get('content').html);
 
 						expect(page.get('content').html.indexOf(page.get('title'))).not.toEqual(-1);
 
