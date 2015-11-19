@@ -1,16 +1,19 @@
 define([
 	'helpers/trigger-method',
-	'helpers/get-value'
+	'helpers/get-value',
+	'helpers/deparam'
 	], function(
 		triggerMethod,
-		getValue
+		getValue,
+		deparam
 	){
 	'use strict';
 
 	var M = {
 
 		triggerMethod: triggerMethod,
-		getValue: getValue
+		getValue: getValue,
+		deparam: deparam
 
 	};
 

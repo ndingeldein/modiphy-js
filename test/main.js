@@ -2,9 +2,8 @@ define(function(){
 	'use strict';
 
 	var specs = [		
-		'spec/modiphy',
-		'spec/helpers',
-		'spec/core'
+		
+		'spec/helpers/deparam',
 		// 'spec/helpers/trigger-method',
 		// 'spec/core/view',
 		// 'spec/core/item-view',

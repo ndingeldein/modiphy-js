@@ -3,6 +3,7 @@ modiphy.js
 ----------------
 helpers/trigger-method.js
 helpers/get-value.js
+helpers/deparam.js
 helpers.js
 core/view.js
 selectable/select-view.js
@@ -22,6 +23,7 @@ modiphy.min.js
 ----------------
 helpers/trigger-method.js
 helpers/get-value.js
+helpers/deparam.js
 helpers.js
 core/view.js
 selectable/select-view.js
@@ -42,8 +44,9 @@ modiphy.bundled.js
 lodash.js
 helpers/trigger-method.js
 helpers/get-value.js
-helpers.js
 jquery.js
+helpers/deparam.js
+helpers.js
 backbone.js
 core/view.js
 selectable/select-view.js
@@ -65,6 +68,7 @@ core/modiphy.core.js
 ----------------
 helpers/trigger-method.js
 helpers/get-value.js
+helpers/deparam.js
 helpers.js
 core/view.js
 selectable/select-view.js
@@ -84,6 +88,7 @@ core/modiphy.core.min.js
 ----------------
 helpers/trigger-method.js
 helpers/get-value.js
+helpers/deparam.js
 helpers.js
 core/view.js
 selectable/select-view.js
@@ -104,8 +109,9 @@ core/modiphy.core.bundled.js
 lodash.js
 helpers/trigger-method.js
 helpers/get-value.js
-helpers.js
 jquery.js
+helpers/deparam.js
+helpers.js
 backbone.js
 core/view.js
 selectable/select-view.js

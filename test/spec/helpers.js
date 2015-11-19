@@ -1,7 +1,7 @@
 define(['lodash', 'helpers'], function(_, M){
 	'use strict';
 
-	describe('modiphy.js core', function(){
+	describe('modiphy.js helpers', function(){
 
 		it('M.triggerMethod should be defined', function(){
 
@@ -12,6 +12,12 @@ define(['lodash', 'helpers'], function(_, M){
 		it('M.getValue should be defined', function(){
 
 			expect(_.isFunction(M.getValue)).toBe(true);
+
+		});
+
+		it('M.deparam should be defined', function(){
+
+			expect(_.isFunction(M.deparam)).toBe(true);
 
 		});
 
