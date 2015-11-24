@@ -5,8 +5,8 @@ define(['backbone', 'gallery/image-gallery', 'backbone.select'], function(Backbo
 
 		model: ImageGallery,
 
-		initialize: function(models){
-			 Backbone.Select.One.applyTo( this, models );
+		initialize: function(models){			
+			Backbone.Select.One.applyTo( this, models );
 		}
 
 	});

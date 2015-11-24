@@ -157,6 +157,7 @@ gallery/gallery-category.js
 gallery/gallery-categories.js
 gallery/image-gallery.js
 gallery/image-galleries.js
+gallery/gallery-loader.js
 gallery/gallery.js
 
 gallery/modiphy.gallery.min.js
@@ -167,6 +168,7 @@ gallery/gallery-category.js
 gallery/gallery-categories.js
 gallery/image-gallery.js
 gallery/image-galleries.js
+gallery/gallery-loader.js
 gallery/gallery.js
 
 pageable/modiphy.pageable.js

@@ -39,6 +39,12 @@ define(['lodash', 'modiphy', 'gallery/gallery'], function(_, M){
 
 		});
 
+		it('M.GalleryLoader should be defined', function(){
+
+			expect(_.isFunction(M.GalleryLoader)).toBe(true);
+
+		});
+
 	});
 
 });

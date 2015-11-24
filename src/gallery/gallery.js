@@ -6,7 +6,8 @@ define([
 	'gallery/gallery-category',
 	'gallery/gallery-categories',
 	'gallery/image-gallery',
-	'gallery/image-galleries'
+	'gallery/image-galleries',
+	'gallery/gallery-loader'
 	], function(
 		_,
 		M,
@@ -15,7 +16,8 @@ define([
 		GalleryCategory,
 		GalleryCategories,
 		ImageGallery,
-		ImageGalleries
+		ImageGalleries,
+		GalleryLoader
 	){
 	'use strict';
 
@@ -26,7 +28,8 @@ define([
 		GalleryCategory: GalleryCategory,
 		GalleryCategories: GalleryCategories,
 		ImageGallery: ImageGallery,
-		ImageGalleries: ImageGalleries		
+		ImageGalleries: ImageGalleries,
+		GalleryLoader: GalleryLoader	
 
 	};
 	
