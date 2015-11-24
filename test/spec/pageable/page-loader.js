@@ -5,6 +5,8 @@ define(['backbone', 'jquery', 'modiphy', 'pageable/page-loader', 'pageable/page'
 	var page;
 	Backbone.history.start({ pushState: true });
 
+	console.log(M);
+
 	describe('PageLoader', function(){
 
 		beforeEach(function(){
@@ -197,6 +199,25 @@ define(['backbone', 'jquery', 'modiphy', 'pageable/page-loader', 'pageable/page'
 
 				});
 
+				it('should trigger model "page:loaded" event and pass page model', function(done){
+
+					var obj = {
+						testCallback: function(){}
+					};
+					spyOn(obj, 'testCallback').and.callThrough();
+					page.on('page:loaded', obj.testCallback);
+
+					loader.load(page).done(function(){
+
+						expect(obj.testCallback).toHaveBeenCalled();
+						expect(obj.testCallback).toHaveBeenCalledWith(page);
+
+						done();
+
+					});
+
+				});
+
 			});
 
 			describe('if page is already loaded', function(){
@@ -234,6 +255,25 @@ define(['backbone', 'jquery', 'modiphy', 'pageable/page-loader', 'pageable/page'
 
 						done();
 					});	
+
+				});
+
+				it('should trigger model "page:loaded" event and pass page model', function(done){
+
+					var obj = {
+						testCallback: function(){}
+					};
+					spyOn(obj, 'testCallback').and.callThrough();
+					page.on('page:loaded', obj.testCallback);
+
+					loader.load(page).done(function(){
+
+						expect(obj.testCallback).toHaveBeenCalled();
+						expect(obj.testCallback).toHaveBeenCalledWith(page);
+
+						done();
+
+					});
 
 				});
 

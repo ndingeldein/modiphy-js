@@ -23,6 +23,23 @@ define(['modiphy', 'pageable/pages', 'pageable/page'], function(M, Pages, Page){
 
 		});
 
+		it('should be able to have pages', function(){
+
+			var home = new Page({
+				name: 'home'
+			});
+
+			var about = new Page({
+				name: 'about'
+			});
+
+			pages.add(home);
+			pages.add(about);
+
+			expect(pages.length).toBe(2);
+
+		});
+
 	});
 	
 });

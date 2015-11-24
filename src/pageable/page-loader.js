@@ -34,6 +34,8 @@ define(['lodash', 'jquery', 'backbone', 'modiphy', 'pageable/page'], function(_,
 					json: json[0]
 				});
 
+				page.trigger('page:loaded', page);
+
 			});
 
 		},

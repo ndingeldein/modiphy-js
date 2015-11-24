@@ -143,32 +143,77 @@ define(['lodash', 'backbone', 'backbone.babysitter', 'core/view', 'core/containe
 
 			describe('if child view options.el is defined', function(){
 
-				
-				it('should not append children to view but should select item from container view el', function(){
+				describe('if child view is a DOM child', function(){
 
+					it('should not append children to view but should select item from container view el', function(){
 					
-					view = new ContainerView({
-						el: '.container'
+						view = new ContainerView({
+							el: '.container'
+						});
+
+						var childView = new View({
+							el: '.item-view-1'
+						});
+
+						var nestedView = new View({
+							el: '.nested-child'
+						});
+
+						spyOn(view.$el, 'append');
+						spyOn(childView, 'render');
+						spyOn(nestedView, 'render');
+
+						expect(view.el.getElementsByClassName('item-view-1').length).toBe(1);
+
+						view.container.add(childView);
+						view.container.add(nestedView);
+
+						view.render();
+
+						expect(view.$el.append).not.toHaveBeenCalled();
+
+						expect(view.el.getElementsByClassName('item-view-1').length).toBe(1);
+						expect(childView.render).toHaveBeenCalled();
+						expect(nestedView.render).toHaveBeenCalled();
+						expect(view.el.getElementsByClassName('nested-child').length).toBe(1);
+
 					});
-
-					var childView = new View({
-						el: '.item-view-1'
-					});
-
-					spyOn(view.$el, 'append');
-
-					expect(view.el.getElementsByClassName('item-view-1').length).toBe(1);
-
-					view.container.add(childView);
-
-					view.render();
-
-					expect(view.$el.append).not.toHaveBeenCalled();
-
-					expect(view.el.getElementsByClassName('item-view-1').length).toBe(1);
-
 
 				});
+
+				describe('if child view is not a DOM child', function(){
+
+					it('should append child into container', function(){
+					
+						view = new ContainerView({
+							el: '.non-child-container'
+						});
+
+						var childView = new View({
+							el: '.non-child'
+						});
+
+						expect(view.$el.find('.non-child').length).toBe(0);
+
+						spyOn(view.$el, 'append').and.callThrough();
+						spyOn(childView, 'render');
+
+						view.container.add(childView);
+						view.render();
+
+						expect(childView.render).toHaveBeenCalled();
+
+						expect(view.$el.append).toHaveBeenCalled();
+						expect(view.el.getElementsByClassName('non-child').length).toBe(1);
+
+						
+						expect(view.el.contains(childView.el)).toBe(true);
+
+
+					});		
+
+				});			
+				
 
 			});
 

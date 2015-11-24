@@ -1,4 +1,4 @@
-define(['modiphy', 'pageable/page', 'lodash'], function(M, Page, _){
+define(['backbone', 'modiphy', 'pageable/page', 'lodash'], function(Backbone, M, Page, _){
 	'use strict';
 
 	var page;
@@ -11,10 +11,14 @@ define(['modiphy', 'pageable/page', 'lodash'], function(M, Page, _){
 
 		});
 
-		it('should extend M.SelectableModel', function(){
+		it('should apply Backbone.Select.Me mixin to the model', function(){
 
-			expect(page instanceof M.SelectableModel).toBe(true);
-			
+			spyOn(Backbone.Select.Me, 'applyTo');
+
+			var myPage = new Page();
+
+			expect(Backbone.Select.Me.applyTo).toHaveBeenCalledWith(myPage);
+
 		});
 
 		describe('isOverlayPage method', function(){

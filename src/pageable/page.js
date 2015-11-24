@@ -1,14 +1,13 @@
-define(['lodash', 'modiphy', 'pageable/page-to-title'], function(_, M){
+define(['lodash', 'backbone', 'modiphy', 'pageable/page-to-title'], function(_, Backbone, M){
 	'use strict';
 
-	var Page = M.SelectableModel.extend({
+	var Page = Backbone.Model.extend({
 
 		defaults: function(){
 
 			return {
 
 				content: {},
-				id: 0,
 				gallery_id: 0,
 				name: 'page_name',
 				layout: 'default',
@@ -18,7 +17,7 @@ define(['lodash', 'modiphy', 'pageable/page-to-title'], function(_, M){
 
 		},
 
-		initialize: function(options){
+		initialize: function(){
 
 			this.set('navText', this.get('navText') || M.pageToTitle(this.get('name')));
 
@@ -28,7 +27,7 @@ define(['lodash', 'modiphy', 'pageable/page-to-title'], function(_, M){
 				this.set('layout', 'default_overlay');
 			}
 
-			M.SelectableModel.prototype.initialize.call(this, options);
+			Backbone.Select.Me.applyTo(this);
 
 		},
 

@@ -1,5 +1,5 @@
  /**
- *	
+ *  
  * https://github.com/AceMetrix/jquery-deparam
  * Duncan Wong <baduncaduncan@gmail.com>
  * LICENSE: MIT
@@ -7,7 +7,7 @@
  **/ 
 
  define(['jquery'], function($){
- 	'use strict';
+    'use strict';
 
     var fragment = function( params, coerce ) {
           
@@ -117,6 +117,6 @@
 
     };
  
-	return deparam;
+    return deparam;
 
 });

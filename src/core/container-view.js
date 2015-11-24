@@ -46,7 +46,7 @@ define(['core/view', 'backbone.babysitter'], function(View, ChildViewContainer){
 			this.container.each(function(view){
 
 				view.render();
-				if(!view.options.el){
+				if(!view.options.el || !this.el.contains(view.el)){
 					this.$el.append(view.el);
 				}
 				

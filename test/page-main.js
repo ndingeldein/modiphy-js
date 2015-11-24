@@ -4,7 +4,9 @@ define(function(){
 	var specs = [		
 		'spec/pageable/page',
 		'spec/pageable/pages',
-		'spec/pageable/page-loader'
+		'spec/pageable/page-loader',
+		'spec/pageable/page-to-title',
+		'spec/pageable/pageable'
 	];
 
 	require(['boot'], function(){

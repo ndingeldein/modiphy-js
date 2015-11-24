@@ -106,8 +106,21 @@ define('helpers/get-value',['lodash'], function(_){
 	return getValue;
 
 });
+define('helpers/map-model',['lodash'], function(_){
+    'use strict';
+
+    var mapModel = function(obj, map) {
+        return _.mapKeys(obj, function(value, key){
+        	return ( map[key] ) ? map[key] : key;
+        });
+    };
+
+    return mapModel;
+
+});
+
  /**
- *	
+ *  
  * https://github.com/AceMetrix/jquery-deparam
  * Duncan Wong <baduncaduncan@gmail.com>
  * LICENSE: MIT
@@ -115,7 +128,7 @@ define('helpers/get-value',['lodash'], function(_){
  **/ 
 
  define('helpers/deparam',['jquery'], function($){
- 	'use strict';
+    'use strict';
 
     var fragment = function( params, coerce ) {
           
@@ -225,16 +238,18 @@ define('helpers/get-value',['lodash'], function(_){
 
     };
  
-	return deparam;
+    return deparam;
 
 });
 define('helpers',[
 	'helpers/trigger-method',
 	'helpers/get-value',
+	'helpers/map-model',
 	'helpers/deparam'
 	], function(
 		triggerMethod,
 		getValue,
+		mapModel,
 		deparam
 	){
 	'use strict';
@@ -243,6 +258,7 @@ define('helpers',[
 
 		triggerMethod: triggerMethod,
 		getValue: getValue,
+		mapModel: mapModel,
 		deparam: deparam
 
 	};
@@ -549,7 +565,7 @@ define('selectable/single-collection',['backbone', 'backbone.select'], function(
 
 	var SingleCollection = Backbone.Collection.extend({
 
-		initialize: function(models){			
+		initialize: function(models){
 			Backbone.Select.One.applyTo(this, models);
 		}
 
@@ -727,7 +743,7 @@ define('core/container-view',['core/view', 'backbone.babysitter'], function(View
 			this.container.each(function(view){
 
 				view.render();
-				if(!view.options.el){
+				if(!view.options.el || !this.el.contains(view.el)){
 					this.$el.append(view.el);
 				}
 				
@@ -939,6 +955,86 @@ define('core/dom-collection-view',['lodash', 'core/collection-view'], function(_
 	return DomCollectionView;
 
 });
+define('core/viewer',['lodash', 'backbone', 'core/view', 'core/container-view', 'helpers/get-value'], function(_, Backbone, View, ContainerView, getValue){
+	'use strict';
+
+	var Viewer = ContainerView.extend({
+
+		constructor: function(options){
+
+			options = getValue(options, this);
+
+			if(options.model){
+				options.model.set('view', undefined);
+			}else{
+				options.model = new Backbone.Model();
+			}
+
+			this.options = _.extend({}, _.result(this, 'options'), options);
+			
+			ContainerView.call(this, this.options);
+
+		},
+
+		initialize: function(){
+			
+			this.listenTo(this.model, 'change:view', this._onViewChanged, this);
+
+		},
+
+		_onViewChanged: function(model){
+
+			if(model.get('view') instanceof View){
+				this._setView();
+			}
+		},
+
+		_setView: function(){			
+
+			if(this._currentView && !this._previousView){
+				this._previousView = this._currentView;
+			}
+			this._currentView = this.model.get('view');
+
+			this.container.add(this._currentView);
+
+			if(this.container.length > 1){				
+				this._previousView.hide().done(_.bind(this._removePreviousViews, this));
+			}else{
+				this._renderChildren();
+				this._currentView.show();
+			}
+
+		},
+
+		_removePreviousViews: function(){
+
+			this.container.each(this._removePreviousView, this);
+			this._previousView = undefined;
+			this._renderChildren();
+			this._currentView.show();
+
+		},
+
+		_removePreviousView: function(view){
+
+			if(view.cid != this.model.get('view').cid){
+				this._destroyItemView(view);
+			}
+
+		},
+
+		getCurrentView: function(){
+			return this.model.get('view');
+		}
+
+	});
+
+
+
+	return Viewer;
+
+});
 define('core',[
 	'lodash',
 	'helpers',
@@ -948,7 +1044,8 @@ define('core',[
 	'core/view-factory',
 	'core/container-view',
 	'core/collection-view',
-	'core/dom-collection-view'
+	'core/dom-collection-view',
+	'core/viewer'
 	], function(
 		_,
 		M,
@@ -958,7 +1055,8 @@ define('core',[
 		ViewFactory,
 		ContainerView,
 		CollectionView,
-		DomCollectionView
+		DomCollectionView,
+		Viewer
 	){
 	'use strict';
 
@@ -969,7 +1067,8 @@ define('core',[
 		ViewFactory: ViewFactory,
 		ContainerView: ContainerView,
 		CollectionView: CollectionView,
-		DomCollectionView: DomCollectionView
+		DomCollectionView: DomCollectionView,
+		Viewer: Viewer
 
 	};
 		

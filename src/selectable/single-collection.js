@@ -3,7 +3,7 @@ define(['backbone', 'backbone.select'], function(Backbone){
 
 	var SingleCollection = Backbone.Collection.extend({
 
-		initialize: function(models){			
+		initialize: function(models){
 			Backbone.Select.One.applyTo(this, models);
 		}
 

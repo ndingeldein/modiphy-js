@@ -7,7 +7,8 @@ define([
 	'core/view-factory',
 	'core/container-view',
 	'core/collection-view',
-	'core/dom-collection-view'
+	'core/dom-collection-view',
+	'core/viewer'
 	], function(
 		_,
 		M,
@@ -17,7 +18,8 @@ define([
 		ViewFactory,
 		ContainerView,
 		CollectionView,
-		DomCollectionView
+		DomCollectionView,
+		Viewer
 	){
 	'use strict';
 
@@ -28,7 +30,8 @@ define([
 		ViewFactory: ViewFactory,
 		ContainerView: ContainerView,
 		CollectionView: CollectionView,
-		DomCollectionView: DomCollectionView
+		DomCollectionView: DomCollectionView,
+		Viewer: Viewer
 
 	};
 		

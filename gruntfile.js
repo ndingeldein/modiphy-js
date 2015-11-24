@@ -58,6 +58,32 @@ module.exports = function(grunt){
 							optimize: 'uglify'
 						},
 						include: ['lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']					
+					},{
+						name: 'gallery/modiphy.gallery',
+						create: true,
+						include: ['gallery/gallery'],
+						exclude: ['modiphy', 'lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']
+					},{
+						name: 'gallery/modiphy.gallery.min',
+						create: true,
+						override: {
+							optimize: 'uglify'
+						},
+						include: ['gallery/gallery'],
+						exclude: ['modiphy', 'lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']
+					},{
+						name: 'pageable/modiphy.pageable',
+						create: true,
+						include: ['pageable/pageable'],
+						exclude: ['modiphy', 'lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']
+					},{
+						name: 'pageable/modiphy.pageable.min',
+						create: true,
+						override: {
+							optimize: 'uglify'
+						},
+						include: ['pageable/pageable'],
+						exclude: ['modiphy', 'lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']
 					}]
 				}
 			}

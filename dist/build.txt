@@ -3,6 +3,7 @@ modiphy.js
 ----------------
 helpers/trigger-method.js
 helpers/get-value.js
+helpers/map-model.js
 helpers/deparam.js
 helpers.js
 core/view.js
@@ -16,6 +17,7 @@ core/view-factory.js
 core/container-view.js
 core/collection-view.js
 core/dom-collection-view.js
+core/viewer.js
 core.js
 modiphy.js
 
@@ -23,6 +25,7 @@ modiphy.min.js
 ----------------
 helpers/trigger-method.js
 helpers/get-value.js
+helpers/map-model.js
 helpers/deparam.js
 helpers.js
 core/view.js
@@ -36,6 +39,7 @@ core/view-factory.js
 core/container-view.js
 core/collection-view.js
 core/dom-collection-view.js
+core/viewer.js
 core.js
 modiphy.js
 
@@ -44,6 +48,7 @@ modiphy.bundled.js
 lodash.js
 helpers/trigger-method.js
 helpers/get-value.js
+helpers/map-model.js
 jquery.js
 helpers/deparam.js
 helpers.js
@@ -61,6 +66,7 @@ backbone.babysitter.js
 core/container-view.js
 core/collection-view.js
 core/dom-collection-view.js
+core/viewer.js
 core.js
 modiphy.js
 
@@ -68,6 +74,7 @@ core/modiphy.core.js
 ----------------
 helpers/trigger-method.js
 helpers/get-value.js
+helpers/map-model.js
 helpers/deparam.js
 helpers.js
 core/view.js
@@ -81,6 +88,7 @@ core/view-factory.js
 core/container-view.js
 core/collection-view.js
 core/dom-collection-view.js
+core/viewer.js
 core.js
 modiphy.js
 
@@ -88,6 +96,7 @@ core/modiphy.core.min.js
 ----------------
 helpers/trigger-method.js
 helpers/get-value.js
+helpers/map-model.js
 helpers/deparam.js
 helpers.js
 core/view.js
@@ -101,6 +110,7 @@ core/view-factory.js
 core/container-view.js
 core/collection-view.js
 core/dom-collection-view.js
+core/viewer.js
 core.js
 modiphy.js
 
@@ -109,6 +119,7 @@ core/modiphy.core.bundled.js
 lodash.js
 helpers/trigger-method.js
 helpers/get-value.js
+helpers/map-model.js
 jquery.js
 helpers/deparam.js
 helpers.js
@@ -126,6 +137,7 @@ backbone.babysitter.js
 core/container-view.js
 core/collection-view.js
 core/dom-collection-view.js
+core/viewer.js
 core.js
 modiphy.js
 
@@ -136,3 +148,39 @@ jquery.js
 backbone.js
 backbone.babysitter.js
 backbone.select.js
+
+gallery/modiphy.gallery.js
+----------------
+gallery/gallery-item.js
+gallery/gallery-items.js
+gallery/gallery-category.js
+gallery/gallery-categories.js
+gallery/image-gallery.js
+gallery/image-galleries.js
+gallery/gallery.js
+
+gallery/modiphy.gallery.min.js
+----------------
+gallery/gallery-item.js
+gallery/gallery-items.js
+gallery/gallery-category.js
+gallery/gallery-categories.js
+gallery/image-gallery.js
+gallery/image-galleries.js
+gallery/gallery.js
+
+pageable/modiphy.pageable.js
+----------------
+pageable/page-to-title.js
+pageable/page.js
+pageable/pages.js
+pageable/page-loader.js
+pageable/pageable.js
+
+pageable/modiphy.pageable.min.js
+----------------
+pageable/page-to-title.js
+pageable/page.js
+pageable/pages.js
+pageable/page-loader.js
+pageable/pageable.js

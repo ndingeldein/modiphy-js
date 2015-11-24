@@ -39,6 +39,12 @@ define(['lodash', 'core'], function(_, M){
 
 		});
 
+		it('M.Viewer should be defined', function(){
+
+			expect(_.isFunction(M.Viewer)).toBe(true);
+
+		});
+
 	});
 
 });

@@ -15,9 +15,15 @@ define(['lodash', 'helpers'], function(_, M){
 
 		});
 
+		it('M.mapModel should be defined', function(){
+
+			expect(_.isFunction(M.mapModel)).toBe(true);
+
+		});
+
 		it('M.deparam should be defined', function(){
 
-			expect(_.isFunction(M.deparam)).toBe(true);
+			expect(_.isFunction(M.mapModel)).toBe(true);
 
 		});
 
