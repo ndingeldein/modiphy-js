@@ -217,7 +217,7 @@ define('pageable/pageable',[
 	){
 	'use strict';
 
-	var pageable = {
+	var Pageable = {
 
 		Page: Page,
 		Pages: Pages,
@@ -226,7 +226,21 @@ define('pageable/pageable',[
 
 	};
 
-	_.extend(M, pageable);
+	return Pageable;
+	
+});
+define('modiphy.pageable',[
+	'lodash',
+	'modiphy',
+	'pageable/pageable'
+	], function(
+		_,
+		M,
+		Pageable
+	){
+	'use strict';
+
+	_.extend(M, Pageable);
 
 	return M;
 	

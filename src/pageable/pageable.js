@@ -15,7 +15,7 @@ define([
 	){
 	'use strict';
 
-	var pageable = {
+	var Pageable = {
 
 		Page: Page,
 		Pages: Pages,
@@ -24,8 +24,6 @@ define([
 
 	};
 
-	_.extend(M, pageable);
-
-	return M;
+	return Pageable;
 	
 });

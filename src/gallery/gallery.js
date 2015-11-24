@@ -1,6 +1,4 @@
-define([
-	'lodash',
-	'modiphy',
+define([	
 	'gallery/gallery-item',
 	'gallery/gallery-items',
 	'gallery/gallery-category',
@@ -8,9 +6,7 @@ define([
 	'gallery/image-gallery',
 	'gallery/image-galleries',
 	'gallery/gallery-loader'
-	], function(
-		_,
-		M,
+	], function(		
 		GalleryItem,
 		GalleryItems,
 		GalleryCategory,
@@ -21,7 +17,7 @@ define([
 	){
 	'use strict';
 
-	var gallery = {
+	var Gallery = {
 
 		GalleryItem: GalleryItem,
 		GalleryItems: GalleryItems,
@@ -33,8 +29,6 @@ define([
 
 	};
 	
-	_.extend(M, gallery);
-
-	return M;
+	return Gallery;
 	
 });

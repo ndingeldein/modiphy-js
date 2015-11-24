@@ -1,4 +1,4 @@
-define(['lodash', 'modiphy', 'gallery/gallery'], function(_, M){
+define(['lodash', 'modiphy', 'modiphy.gallery'], function(_, M){
 	'use strict';
 
 	describe('modiphy.gallery.js', function(){

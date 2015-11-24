@@ -159,6 +159,7 @@ gallery/image-gallery.js
 gallery/image-galleries.js
 gallery/gallery-loader.js
 gallery/gallery.js
+modiphy.gallery.js
 
 gallery/modiphy.gallery.min.js
 ----------------
@@ -170,6 +171,7 @@ gallery/image-gallery.js
 gallery/image-galleries.js
 gallery/gallery-loader.js
 gallery/gallery.js
+modiphy.gallery.js
 
 pageable/modiphy.pageable.js
 ----------------
@@ -178,11 +180,32 @@ pageable/page.js
 pageable/pages.js
 pageable/page-loader.js
 pageable/pageable.js
+modiphy.pageable.js
 
 pageable/modiphy.pageable.min.js
 ----------------
+helpers/trigger-method.js
+helpers/get-value.js
+helpers/map-model.js
+helpers/deparam.js
+helpers.js
+core/view.js
+selectable/select-view.js
+selectable/selectable-model.js
+selectable/single-collection.js
+selectable/multi-collection.js
+selectable.js
+core/item-view.js
+core/view-factory.js
+core/container-view.js
+core/collection-view.js
+core/dom-collection-view.js
+core/viewer.js
+core.js
+modiphy.js
 pageable/page-to-title.js
 pageable/page.js
 pageable/pages.js
 pageable/page-loader.js
 pageable/pageable.js
+modiphy.pageable.js

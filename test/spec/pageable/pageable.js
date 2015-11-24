@@ -1,4 +1,4 @@
-define(['lodash', 'modiphy', 'pageable/pageable'], function(_, M){
+define(['lodash', 'modiphy', 'modiphy.pageable'], function(_, M){
 	'use strict';
 
 	describe('modiphy.pageable.js', function(){

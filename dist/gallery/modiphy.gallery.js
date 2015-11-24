@@ -340,9 +340,7 @@ define('gallery/gallery-loader',['lodash', 'jquery', 'backbone', 'modiphy', 'gal
 	return GalleryLoader;
 
 });
-define('gallery/gallery',[
-	'lodash',
-	'modiphy',
+define('gallery/gallery',[	
 	'gallery/gallery-item',
 	'gallery/gallery-items',
 	'gallery/gallery-category',
@@ -350,9 +348,7 @@ define('gallery/gallery',[
 	'gallery/image-gallery',
 	'gallery/image-galleries',
 	'gallery/gallery-loader'
-	], function(
-		_,
-		M,
+	], function(		
 		GalleryItem,
 		GalleryItems,
 		GalleryCategory,
@@ -363,7 +359,7 @@ define('gallery/gallery',[
 	){
 	'use strict';
 
-	var gallery = {
+	var Gallery = {
 
 		GalleryItem: GalleryItem,
 		GalleryItems: GalleryItems,
@@ -375,7 +371,21 @@ define('gallery/gallery',[
 
 	};
 	
-	_.extend(M, gallery);
+	return Gallery;
+	
+});
+define('modiphy.gallery',[
+	'lodash',
+	'modiphy',
+	'gallery/gallery'
+	], function(
+		_,
+		M,
+		Gallery
+	){
+	'use strict';
+
+	_.extend(M, Gallery);
 
 	return M;
 	

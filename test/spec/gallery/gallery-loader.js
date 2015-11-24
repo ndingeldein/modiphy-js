@@ -83,7 +83,7 @@ define(['gallery/gallery-loader'], function(GalleryLoader){
 
 				loader.on('gallery:loaded', obj.loaded);
 				loader.once('galleries:loaded', obj.loadedAll);
-				loader.load([744, 745, 746]);			
+				loader.load([744, 745, 746]);
 
 
 			});

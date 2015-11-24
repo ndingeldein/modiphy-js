@@ -61,7 +61,7 @@ module.exports = function(grunt){
 					},{
 						name: 'gallery/modiphy.gallery',
 						create: true,
-						include: ['gallery/gallery'],
+						include: ['modiphy.gallery'],
 						exclude: ['modiphy', 'lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']
 					},{
 						name: 'gallery/modiphy.gallery.min',
@@ -69,12 +69,12 @@ module.exports = function(grunt){
 						override: {
 							optimize: 'uglify'
 						},
-						include: ['gallery/gallery'],
+						include: ['modiphy.gallery'],
 						exclude: ['modiphy', 'lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']
 					},{
 						name: 'pageable/modiphy.pageable',
 						create: true,
-						include: ['pageable/pageable'],
+						include: ['modiphy.pageable'],
 						exclude: ['modiphy', 'lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']
 					},{
 						name: 'pageable/modiphy.pageable.min',
@@ -82,8 +82,8 @@ module.exports = function(grunt){
 						override: {
 							optimize: 'uglify'
 						},
-						include: ['pageable/pageable'],
-						exclude: ['modiphy', 'lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']
+						include: ['modiphy.pageable'],
+						exclude: ['lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']
 					}]
 				}
 			}
