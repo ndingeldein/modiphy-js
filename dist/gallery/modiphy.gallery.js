@@ -175,7 +175,7 @@ define('gallery/gallery-categories',['backbone', 'gallery/gallery-category', 'ba
 		model: GalleryCategory,
 
 		initialize: function(models){
-			 Backbone.Select.One.applyTo( this, models );
+			Backbone.Select.One.applyTo( this, models );
 		}
 
 	});

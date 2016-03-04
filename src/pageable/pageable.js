@@ -3,15 +3,19 @@ define([
 	'modiphy',
 	'pageable/page',
 	'pageable/pages',
+	'pageable/page-view',
 	'pageable/page-loader',
-	'pageable/page-to-title'
+	'pageable/page-to-title',
+	'pageable/is-overlay-page'
 	], function(
 		_,
 		M,
 		Page,
 		Pages,
+		PageView,
 		PageLoader,
-		pageToTitle
+		pageToTitle,
+		isOverlayPage
 	){
 	'use strict';
 
@@ -19,8 +23,10 @@ define([
 
 		Page: Page,
 		Pages: Pages,
+		PageView: PageView,
 		PageLoader: PageLoader,
-		pageToTitle: pageToTitle
+		pageToTitle: pageToTitle,
+		isOverlayPage: isOverlayPage
 
 	};
 

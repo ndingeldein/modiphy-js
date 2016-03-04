@@ -15,6 +15,12 @@ define(['lodash', 'modiphy', 'modiphy.pageable'], function(_, M){
 
 		});
 
+		it('M.PageView should be defined', function(){
+
+			expect(_.isFunction(M.PageView)).toBe(true);
+
+		});
+
 		it('M.PageLoader should be defined', function(){
 
 			expect(_.isFunction(M.PageLoader)).toBe(true);
@@ -24,6 +30,12 @@ define(['lodash', 'modiphy', 'modiphy.pageable'], function(_, M){
 		it('M.pageToTitle should be defined', function(){
 
 			expect(_.isFunction(M.pageToTitle)).toBe(true);
+
+		});
+
+		it('M.isOverlayPage should be defined', function(){
+
+			expect(_.isFunction(M.isOverlayPage)).toBe(true);
 
 		});
 

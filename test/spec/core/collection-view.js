@@ -45,19 +45,19 @@ define(['lodash', 'backbone', 'core/view', 'core/item-view', 'core/container-vie
 
 				view = new CollectionView({
 					factoryOptions: {
-						viewType: MyChildView
+						defaultViewType: MyChildView
 					}
 				});
 
-				expect(view.factory.viewType).toBe(MyChildView);
+				expect(view.factory.defaultViewType).toBe(MyChildView);
 				
 				view = new CollectionView({
 					factoryOptions: {
-						viewType: MyView
+						defaultViewType: MyView
 					}
 				});
 
-				expect(view.factory.viewType).toBe(ItemView);
+				expect(view.factory.defaultViewType).toBe(ItemView);
 
 			});
 
@@ -127,11 +127,13 @@ define(['lodash', 'backbone', 'core/view', 'core/item-view', 'core/container-vie
 
 				});
 
-				it('should use a model\'s custom view type if specified', function(){
+				it('should use a model\'s custom view type if specified and is registered', function(){
 
 					var CustomType = ItemView.extend();
 
-					collection.at(2).set('viewType', CustomType);
+					view.factory.registerViewType('special', CustomType);
+
+					collection.at(2).set('viewType', 'special');
 
 					view.render();
 

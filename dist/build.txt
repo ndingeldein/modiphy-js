@@ -178,7 +178,9 @@ pageable/modiphy.pageable.js
 pageable/page-to-title.js
 pageable/page.js
 pageable/pages.js
+pageable/page-view.js
 pageable/page-loader.js
+pageable/is-overlay-page.js
 pageable/pageable.js
 modiphy.pageable.js
 
@@ -206,6 +208,8 @@ modiphy.js
 pageable/page-to-title.js
 pageable/page.js
 pageable/pages.js
+pageable/page-view.js
 pageable/page-loader.js
+pageable/is-overlay-page.js
 pageable/pageable.js
 modiphy.pageable.js

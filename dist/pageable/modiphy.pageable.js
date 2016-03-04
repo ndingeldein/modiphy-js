@@ -8,7 +8,7 @@ define('pageable/page-to-title',[],function(){
 	return pageToTitle;
 
 });
-define('pageable/page',['lodash', 'backbone', 'modiphy', 'pageable/page-to-title'], function(_, Backbone, M){
+define('pageable/page',['lodash', 'backbone', 'modiphy', 'pageable/page-to-title'], function(_, Backbone, M, pageToTitle){
 	'use strict';
 
 	var Page = Backbone.Model.extend({
@@ -27,9 +27,11 @@ define('pageable/page',['lodash', 'backbone', 'modiphy', 'pageable/page-to-title
 
 		},
 
+		idAttribute: 'name',
+
 		initialize: function(){
 
-			this.set('navText', this.get('navText') || M.pageToTitle(this.get('name')));
+			this.set('navText', this.get('navText') ||pageToTitle(this.get('name')));
 
 			this.set('title', this.get('title') || this.get('navText'));
 
@@ -74,6 +76,34 @@ define('pageable/pages',['modiphy', 'pageable/page'], function(M, Page){
 	});
 
 	return Pages;
+
+});
+define('pageable/page-view',['modiphy'], function(M){
+	'use strict';
+
+	var PageView = M.ContainerView.extend({
+
+		tagName: 'div',
+
+		className: 'page',
+
+		initialize: function(){
+
+			this.$el.addClass( this.model.get('type') );
+			this.$el.addClass( this.model.get('layout') );
+			this.$el.addClass( this.model.get('name') );
+
+		},
+
+		onBeforeRender: function(){
+			if( !this.template ){
+				this.$el.html( this.model.get('content').html );
+			}
+		}
+
+	});
+
+	return PageView;
 
 });
 define('pageable/page-loader',['lodash', 'jquery', 'backbone', 'modiphy', 'pageable/page'], function(_, $, Backbone, M, Page){
@@ -200,20 +230,34 @@ define('pageable/page-loader',['lodash', 'jquery', 'backbone', 'modiphy', 'pagea
 	return PageLoader;
 
 });
+define('pageable/is-overlay-page',[],function(){
+	'use strict';
+
+	var isOverlayPage = function(page){
+		return page.isOverlayPage();
+	};
+
+	return isOverlayPage;
+
+});
 define('pageable/pageable',[
 	'lodash',
 	'modiphy',
 	'pageable/page',
 	'pageable/pages',
+	'pageable/page-view',
 	'pageable/page-loader',
-	'pageable/page-to-title'
+	'pageable/page-to-title',
+	'pageable/is-overlay-page'
 	], function(
 		_,
 		M,
 		Page,
 		Pages,
+		PageView,
 		PageLoader,
-		pageToTitle
+		pageToTitle,
+		isOverlayPage
 	){
 	'use strict';
 
@@ -221,8 +265,10 @@ define('pageable/pageable',[
 
 		Page: Page,
 		Pages: Pages,
+		PageView: PageView,
 		PageLoader: PageLoader,
-		pageToTitle: pageToTitle
+		pageToTitle: pageToTitle,
+		isOverlayPage: isOverlayPage
 
 	};
 

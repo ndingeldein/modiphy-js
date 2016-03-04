@@ -5,18 +5,33 @@ define(['lodash', 'core/view', 'core/item-view'], function(_, View, ItemView){
 
 		var defaults = {
 			viewOptions : {},
-			viewType: ItemView,
+			defaultViewType: ItemView,
 			viewPrototype: View,
 			modelViewOptionsProperty: 'viewOptions',
 			modelViewTypeProperty: 'viewType'
 		};
 
+		this._viewTypes = {};
+
 		options = options ? options : {};
 		_.extend(this, _.defaults(options, defaults));
+
+		this.registerViewType('default', this.defaultViewType);		
 
 	};
 
 	_.extend(ViewFactory.prototype, {
+
+		registerViewType: function(name, viewType){
+
+			if(_.isFunction(viewType) && viewType.prototype instanceof this.viewPrototype){
+				this._viewTypes[name] = viewType;
+				if(name == 'default'){
+					this.defaultViewType = viewType;
+				}
+			}
+
+		},
 
 		getView: function(model){
 
@@ -34,11 +49,7 @@ define(['lodash', 'core/view', 'core/item-view'], function(_, View, ItemView){
 
 			var viewType = model.get(this.modelViewTypeProperty);
 
-			if(_.isFunction(viewType) && viewType.prototype instanceof this.viewPrototype){
-				return viewType;
-			}else{
-				return this.viewType;
-			}
+			return ( this._viewTypes[viewType] ) ? this._viewTypes[viewType] : this._viewTypes['default'];
 
 		},
 

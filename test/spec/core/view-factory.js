@@ -3,7 +3,13 @@ define(['lodash', 'backbone', 'core/view', 'core/item-view', 'core/view-factory'
 
 	describe('modiphy ViewFactory', function(){
 
-		var factory;		
+		var factory;
+
+		var CustomView = ItemView.extend({
+			foo: 'bar'
+		});	
+
+		var InvalidView = function(){};
 
 		describe('options', function(){
 
@@ -36,19 +42,19 @@ define(['lodash', 'backbone', 'core/view', 'core/item-view', 'core/view-factory'
 
 			});
 
-			describe('viewType', function(){
+			describe('defaultViewType', function(){
 				it('should have default value of ItemView', function(){
 
-					expect(factory.viewType).toBe(ItemView);
+					expect(factory.defaultViewType).toBe(ItemView);
 
 				});
 
 				it('should be able to be overwritten in constructor', function(){
 
 					var factory = new ViewFactory({
-						viewType: Backbone.View
+						defaultViewType: Backbone.View
 					});
-					expect(factory.viewType).toBe(Backbone.View);
+					expect(factory.defaultViewType).toBe(Backbone.View);
 
 				});
 			});
@@ -112,6 +118,54 @@ define(['lodash', 'backbone', 'core/view', 'core/item-view', 'core/view-factory'
 
 		});
 
+		describe('registerViewType and viewTypes', function(){
+
+			describe('defaultViewType', function(){
+
+				it('should have a default type when initialized', function(){
+
+					expect(factory._viewTypes['default']).toBe(ItemView);
+
+				});
+
+				it('should be updated when new default type is registered', function(){
+
+					factory.registerViewType('default', CustomView);
+					expect(factory.defaultViewType).toBe(CustomView);
+
+					factory.registerViewType('default', ItemView);
+
+				});
+
+			});
+
+
+			describe('if type supplied is NOT a valid prototype', function(){
+
+				it('should NOT register the view type', function(){
+
+					factory.registerViewType('invalid', InvalidView);
+
+					expect(factory._viewTypes.invalid).not.toBeDefined();
+
+				});
+
+			});
+
+			describe('if type supplied is a valid prototype', function(){
+
+				it('should register the view type', function(){
+
+					factory.registerViewType('custom', CustomView);
+
+					expect(factory._viewTypes.custom).toBe(CustomView);
+
+				});
+
+			});
+
+		});
+
 		describe('getView method', function(){
 
 			beforeEach(function(){
@@ -138,24 +192,26 @@ define(['lodash', 'backbone', 'core/view', 'core/item-view', 'core/view-factory'
 
 			describe('if modelViewTypeProperty is NOT found on model', function(){
 
-				it('should return an instance of viewType', function(){
+				it('should return an instance of defaultViewType', function(){
 					var model = new Backbone.Model();
 
-					expect(factory.getView(model) instanceof factory.viewType).toBe(true);
+					expect(factory.getView(model) instanceof factory.defaultViewType).toBe(true);
 				});				
 
 			});
 
 			describe('if modelViewTypeProperty is found on model', function(){
 
-				describe('and it is and instance of viewPrototype', function(){
+				describe('and it is and a registered view type', function(){
 
-					it('should return that type if it is an instance of viewPrototype', function(){
+					it('should return that type', function(){
 
 						var Type = ItemView.extend();
+						factory.registerViewType('my_type', Type);
+
 
 						var model = new Backbone.Model({
-							viewType: Type
+							viewType: 'my_type'
 						});
 
 						expect(factory.getView(model) instanceof factory.viewPrototype).toBe(true);

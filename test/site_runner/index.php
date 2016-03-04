@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jasmine Spec Runner v2.1.1</title>
+
+  <link rel="shortcut icon" type="image/png" href="../lib/jasmine-2.1.1/jasmine_favicon.png">
+  <link rel="stylesheet" href="../lib/jasmine-2.1.1/jasmine.css">  
+  
+  <script>
+  var require = {
+    baseUrl: '../../src',
+    paths: {
+      'modiphy': '../dist/modiphy',
+      'modiphy.pageable': '../dist/pageable/modiphy.pageable',
+      'spec': '../test/spec',
+      'jasmine': '../test/lib/jasmine-2.1.1/jasmine',
+      'jasmine-html': '../test/lib/jasmine-2.1.1/jasmine-html',
+      'boot': '../test/lib/jasmine-2.1.1/boot',
+      'lodash': '../bower_components/lodash/lodash',     
+      /**
+      
+        TODO:
+        - create custom amd build of jquery using jquery modules from bower_components/jquery/src/
+        - required modules: Deferred, manipulation, ajax
+      
+      **/
+      
+      'jquery': '../bower_components/jquery/dist/jquery',
+      'backbone': '../bower_components/backbone/backbone',
+      'backbone.babysitter': '../bower_components/backbone.babysitter/lib/backbone.babysitter',
+      'backbone.select': '../bower_components/backbone.select/dist/amd/backbone.select',
+      'backbone.queryparams': '../bower_components/backbone-query-parameters/backbone.queryparams',
+      'jasmine-jquery': '../test/lib/jasmine-jquery',
+      'handlebars.runtime': '../bower_components/handlebars/handlebars.runtime.amd',
+      'templates': '../test/templates/templates'
+    },
+    map: {
+      '*': {
+        'underscore': 'lodash'
+      }
+    },
+    shim: {
+      'jasmine-html': {
+        deps: ['jasmine'],
+        exports: 'window.jasmineRequire'
+      },
+      'boot': {
+        deps: ['jasmine', 'jasmine-html'],
+        exports: 'window.jasmineRequire'
+      },
+      'jasmine-jquery': {
+        deps: ['jasmine', 'jquery']
+      }
+    }
+  }
+  </script>
+  <script data-main="../test/site_runner/site-main" src="../../bower_components/requirejs/require.js"></script>
+
+
+</head>
+
+<body>
+</body>
+</html>

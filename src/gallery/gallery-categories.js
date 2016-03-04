@@ -6,7 +6,7 @@ define(['backbone', 'gallery/gallery-category', 'backbone.select'], function(Bac
 		model: GalleryCategory,
 
 		initialize: function(models){
-			 Backbone.Select.One.applyTo( this, models );
+			Backbone.Select.One.applyTo( this, models );
 		}
 
 	});

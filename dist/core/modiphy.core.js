@@ -646,18 +646,33 @@ define('core/view-factory',['lodash', 'core/view', 'core/item-view'], function(_
 
 		var defaults = {
 			viewOptions : {},
-			viewType: ItemView,
+			defaultViewType: ItemView,
 			viewPrototype: View,
 			modelViewOptionsProperty: 'viewOptions',
 			modelViewTypeProperty: 'viewType'
 		};
 
+		this._viewTypes = {};
+
 		options = options ? options : {};
 		_.extend(this, _.defaults(options, defaults));
+
+		this.registerViewType('default', this.defaultViewType);		
 
 	};
 
 	_.extend(ViewFactory.prototype, {
+
+		registerViewType: function(name, viewType){
+
+			if(_.isFunction(viewType) && viewType.prototype instanceof this.viewPrototype){
+				this._viewTypes[name] = viewType;
+				if(name == 'default'){
+					this.defaultViewType = viewType;
+				}
+			}
+
+		},
 
 		getView: function(model){
 
@@ -675,11 +690,7 @@ define('core/view-factory',['lodash', 'core/view', 'core/item-view'], function(_
 
 			var viewType = model.get(this.modelViewTypeProperty);
 
-			if(_.isFunction(viewType) && viewType.prototype instanceof this.viewPrototype){
-				return viewType;
-			}else{
-				return this.viewType;
-			}
+			return ( this._viewTypes[viewType] ) ? this._viewTypes[viewType] : this._viewTypes['default'];
 
 		},
 
@@ -806,8 +817,8 @@ define('core/collection-view',['lodash', 'backbone', 'core/view', 'core/item-vie
 
 			this.factory = new ViewFactory(this.options.factoryOptions);
 
-			if(this.factory.viewType.prototype instanceof View === false){
-				this.factory.viewType = ItemView;
+			if(this.factory.defaultViewType.prototype instanceof View === false){
+				this.factory.registerViewType('default', ItemView);
 			}
 			
 			ContainerView.call(this, this.options);
@@ -895,8 +906,7 @@ define('core/collection-view',['lodash', 'backbone', 'core/view', 'core/item-vie
 			//make sure if index is defined it is less than this.$el.children length
 
 			if(!_.isUndefined(index) && index >= 0 && index < this.$el.children().length ){
-				this.$el.children().eq(index).before(view.render().el);
-				console.log(view.template);
+				this.$el.children().eq(index).before(view.render().el);			
 			}else{
 				this.$el.append(view.render().el);
 			}

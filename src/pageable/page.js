@@ -1,4 +1,4 @@
-define(['lodash', 'backbone', 'modiphy', 'pageable/page-to-title'], function(_, Backbone, M){
+define(['lodash', 'backbone', 'modiphy', 'pageable/page-to-title'], function(_, Backbone, M, pageToTitle){
 	'use strict';
 
 	var Page = Backbone.Model.extend({
@@ -17,9 +17,11 @@ define(['lodash', 'backbone', 'modiphy', 'pageable/page-to-title'], function(_, 
 
 		},
 
+		idAttribute: 'name',
+
 		initialize: function(){
 
-			this.set('navText', this.get('navText') || M.pageToTitle(this.get('name')));
+			this.set('navText', this.get('navText') ||pageToTitle(this.get('name')));
 
 			this.set('title', this.get('title') || this.get('navText'));
 

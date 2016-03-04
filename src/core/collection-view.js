@@ -17,8 +17,8 @@ define(['lodash', 'backbone', 'core/view', 'core/item-view', 'backbone.babysitte
 
 			this.factory = new ViewFactory(this.options.factoryOptions);
 
-			if(this.factory.viewType.prototype instanceof View === false){
-				this.factory.viewType = ItemView;
+			if(this.factory.defaultViewType.prototype instanceof View === false){
+				this.factory.registerViewType('default', ItemView);
 			}
 			
 			ContainerView.call(this, this.options);
@@ -106,8 +106,7 @@ define(['lodash', 'backbone', 'core/view', 'core/item-view', 'backbone.babysitte
 			//make sure if index is defined it is less than this.$el.children length
 
 			if(!_.isUndefined(index) && index >= 0 && index < this.$el.children().length ){
-				this.$el.children().eq(index).before(view.render().el);
-				console.log(view.template);
+				this.$el.children().eq(index).before(view.render().el);			
 			}else{
 				this.$el.append(view.render().el);
 			}

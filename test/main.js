@@ -9,9 +9,9 @@ define(function(){
 		// 'spec/core/view',
 		// 'spec/core/item-view',
 		// 'spec/core/container-view',
-		// 'spec/core/view-factory',
-		// 'spec/core/collection-view',
-		// 'spec/core/dom-collection-view',
+		'spec/core/view-factory',
+		'spec/core/collection-view',
+		'spec/core/dom-collection-view'
 		// 'spec/core/viewer',
 		// 'spec/selectable/select-view',
 		// 'spec/selectable/selectable-model',
