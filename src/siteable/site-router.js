@@ -60,7 +60,8 @@ define(['lodash', 'jquery', 'backbone', 'modiphy', 'backbone.queryparams'], func
 				this.pages.overlay.select(page);
 
 			}else{
-				this.pages.overlay.deselect();
+				this.pages.overlay.deselect();				
+				this.site.overlayViewer.clearViews();
 			}
 
 		},

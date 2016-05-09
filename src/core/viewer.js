@@ -5,6 +5,8 @@ define(['lodash', 'backbone', 'core/view', 'core/container-view', 'helpers/get-v
 
 		constructor: function(options){
 
+			options = options ? options : {};
+
 			options = getValue(options, this);
 
 			if(options.model){
@@ -32,8 +34,8 @@ define(['lodash', 'backbone', 'core/view', 'core/container-view', 'helpers/get-v
 			}
 		},
 
-		_setView: function(){			
-
+		_setView: function(){
+			
 			if(this._currentView && !this._previousView){
 				this._previousView = this._currentView;
 			}
@@ -46,7 +48,7 @@ define(['lodash', 'backbone', 'core/view', 'core/container-view', 'helpers/get-v
 			}else{
 				this._renderChildren();
 				this._currentView.show();
-			}
+			}							
 
 		},
 
@@ -55,13 +57,17 @@ define(['lodash', 'backbone', 'core/view', 'core/container-view', 'helpers/get-v
 			this.container.each(this._removePreviousView, this);
 			this._previousView = undefined;
 			this._renderChildren();
-			this._currentView.show();
+			if(this._currentView){
+				this._currentView.show();
+			}else{
+				this.triggerMethod('viewer:cleared');
+			}	
 
 		},
 
 		_removePreviousView: function(view){
 
-			if(view.cid != this.model.get('view').cid){
+			if(!this.model.get('view') || view.cid != this.model.get('view').cid){
 				this._destroyItemView(view);
 			}
 
@@ -69,6 +75,23 @@ define(['lodash', 'backbone', 'core/view', 'core/container-view', 'helpers/get-v
 
 		getCurrentView: function(){
 			return this.model.get('view');
+		},
+
+		clearViews: function(){
+
+			if(!this.model.get('view')){
+				return;
+			}
+
+			this.model.set('view', undefined);
+
+			if(!this._previousView){
+				this._previousView = this._currentView;
+			}
+			this._currentView = undefined;
+
+			this._previousView.hide().done(_.bind(this._removePreviousViews, this));
+
 		}
 
 	});

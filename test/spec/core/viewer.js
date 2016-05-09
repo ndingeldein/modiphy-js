@@ -154,7 +154,7 @@ define(['core/view', 'core/container-view', 'core/viewer', 'lodash', 'jquery', '
 
 			describe('when model\'s "view" property is changed', function(){
 
-				describe('when "view" propert is defined', function(){
+				describe('when "view" property is defined', function(){
 
 					describe('when view is not an instance of View', function(){
 
@@ -315,10 +315,72 @@ define(['core/view', 'core/container-view', 'core/viewer', 'lodash', 'jquery', '
 
 				});				
 
-			});	
-
+			});
 
 		});
+
+		describe('clearView method', function(){
+
+			it('should remove all views', function(){
+
+				view = new View({
+					el: $view1
+				});
+
+				_.extend(view, hideView);
+
+				view2 = new View({
+					el: $view2
+				});
+
+				_.extend(view2, hideView, showView);
+
+				jasmine.clock().install();
+				
+				viewer.model.set('view', view);
+
+				viewer.model.set('view', view2);
+
+				jasmine.clock().tick(250);
+
+				viewer.clearViews();
+
+				expect(viewer._currentView).toBeUndefined();
+
+				expect(viewer.container.length).toBeGreaterThan(0);
+
+				jasmine.clock().tick(250);
+
+				expect(viewer._previousView).toBeUndefined();
+				expect(viewer.container.length).toBe(0);
+							
+				
+
+			});
+
+			it('should trigger viewer:cleared', function(){
+
+				view = new View({
+					el: $view1
+				});
+
+				var obj = {
+					onCleared: function(){}
+				}
+
+				viewer.model.set('view', view);
+
+				spyOn(obj, 'onCleared');
+
+				viewer.on('viewer:cleared', obj.onCleared);
+
+				viewer.clearViews();
+
+				expect(obj.onCleared).toHaveBeenCalled();
+
+			});
+
+		});	
 
 
 	});

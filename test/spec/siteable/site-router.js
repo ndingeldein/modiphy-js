@@ -1,4 +1,4 @@
-define(['lodash', 'backbone', 'site/site', 'site/site-router'], function(_, Backbone, Site, SiteRouter){
+define(['lodash', 'backbone', 'siteable/site', 'siteable/site-router'], function(_, Backbone, Site, SiteRouter){
 	'use strict';
 
 	var pages = [
@@ -19,16 +19,16 @@ define(['lodash', 'backbone', 'site/site', 'site/site-router'], function(_, Back
 		}
 	];
 
-	var site = new Site();
+	var site = new Site({	
+		rootDirectory: '/modiphy-js/test/site_runner/'
+	});
 	site.addPages(pages);
 
 	var router = new SiteRouter({
 		site: site
 	});
-	var site_root = '/modiphy-js/test/site_runner/';
-
-
-	Backbone.history.start({ pushState: true, root: site_root });
+	
+	site.startHistory();
 
 	describe('modiphy.site-router', function(){
 

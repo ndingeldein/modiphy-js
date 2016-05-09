@@ -84,6 +84,19 @@ module.exports = function(grunt){
 						},
 						include: ['modiphy.pageable'],
 						exclude: ['lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']
+					},{
+						name: 'siteable/modiphy.siteable',
+						create: true,
+						include: ['modiphy.siteable'],
+						exclude: ['modiphy', 'lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']
+					},{
+						name: 'siteable/modiphy.siteable.min',
+						create: true,
+						override: {
+							optimize: 'uglify'
+						},
+						include: ['modiphy.siteable'],
+						exclude: ['lodash', 'backbone', 'jquery', 'backbone.babysitter', 'backbone.select']
 					}]
 				}
 			}

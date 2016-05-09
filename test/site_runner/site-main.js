@@ -1,9 +1,10 @@
 define(function(){
 	'use strict';
 
-	var specs = [		
-		'spec/site/site'
-		// 'spec/site/site-router'
+	var specs = [
+		// 'spec/siteable/overlay-page-wrapper'
+		'spec/siteable/site'
+		//'spec/siteable/site-router',		
 	];
 
 	require(['boot'], function(){

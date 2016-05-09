@@ -972,6 +972,8 @@ define('core/viewer',['lodash', 'backbone', 'core/view', 'core/container-view', 
 
 		constructor: function(options){
 
+			options = options ? options : {};
+
 			options = getValue(options, this);
 
 			if(options.model){
@@ -999,8 +1001,8 @@ define('core/viewer',['lodash', 'backbone', 'core/view', 'core/container-view', 
 			}
 		},
 
-		_setView: function(){			
-
+		_setView: function(){
+			
 			if(this._currentView && !this._previousView){
 				this._previousView = this._currentView;
 			}
@@ -1013,7 +1015,7 @@ define('core/viewer',['lodash', 'backbone', 'core/view', 'core/container-view', 
 			}else{
 				this._renderChildren();
 				this._currentView.show();
-			}
+			}							
 
 		},
 
@@ -1022,13 +1024,17 @@ define('core/viewer',['lodash', 'backbone', 'core/view', 'core/container-view', 
 			this.container.each(this._removePreviousView, this);
 			this._previousView = undefined;
 			this._renderChildren();
-			this._currentView.show();
+			if(this._currentView){
+				this._currentView.show();
+			}else{
+				this.triggerMethod('viewer:cleared');
+			}	
 
 		},
 
 		_removePreviousView: function(view){
 
-			if(view.cid != this.model.get('view').cid){
+			if(!this.model.get('view') || view.cid != this.model.get('view').cid){
 				this._destroyItemView(view);
 			}
 
@@ -1036,6 +1042,23 @@ define('core/viewer',['lodash', 'backbone', 'core/view', 'core/container-view', 
 
 		getCurrentView: function(){
 			return this.model.get('view');
+		},
+
+		clearViews: function(){
+
+			if(!this.model.get('view')){
+				return;
+			}
+
+			this.model.set('view', undefined);
+
+			if(!this._previousView){
+				this._previousView = this._currentView;
+			}
+			this._currentView = undefined;
+
+			this._previousView.hide().done(_.bind(this._removePreviousViews, this));
+
 		}
 
 	});
