@@ -479,7 +479,7 @@ define('pageable/page-to-title',[],function(){
 	'use strict';
 
 	var pageToTitle = function(str){
-		return str.split('_').join(' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+		return str.split('-').join(' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 	};
 
 	return pageToTitle;
@@ -496,7 +496,7 @@ define('pageable/page',['lodash', 'backbone', 'modiphy', 'pageable/page-to-title
 
 				content: {},
 				gallery_id: 0,
-				name: 'page_name',
+				name: 'page-name',
 				layout: 'default',
 				type: 'text'
 
@@ -508,12 +508,12 @@ define('pageable/page',['lodash', 'backbone', 'modiphy', 'pageable/page-to-title
 
 		initialize: function(){
 
-			this.set('navText', this.get('navText') ||pageToTitle(this.get('name')));
+			this.set('navText', this.get('navText') || pageToTitle(this.get('name')));
 
 			this.set('title', this.get('title') || this.get('navText'));
 
 			if( this.isOverlayPage() && this.get('layout') === 'default' ){
-				this.set('layout', 'default_overlay');
+				this.set('layout', 'default-overlay');
 			}
 
 			Backbone.Select.Me.applyTo(this);
