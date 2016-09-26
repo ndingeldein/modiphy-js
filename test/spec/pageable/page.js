@@ -38,7 +38,7 @@ define(['backbone', 'modiphy', 'pageable/page', 'lodash'], function(Backbone, M,
 			it('should return true if page is an overlay page', function(){
 
 				page = new Page({
-					linkUrl: '?overlay=am_an_overlay'
+					linkUrl: '?overlay=am-an-overlay'
 				});
 
 				expect(page.isOverlayPage()).toBe(true);
@@ -151,7 +151,7 @@ define(['backbone', 'modiphy', 'pageable/page', 'lodash'], function(Backbone, M,
 
 				});
 
-				it('should default to "default_overlay" if page is an overlay page', function(){
+				it('should default to "default-overlay" if page is an overlay page', function(){
 
 					expect(page.get('layout')).toBe('default');
 
@@ -159,7 +159,7 @@ define(['backbone', 'modiphy', 'pageable/page', 'lodash'], function(Backbone, M,
 						linkUrl: '?overlay=hotdog'
 					});
 
-					expect(page.get('layout')).toBe('default_overlay');
+					expect(page.get('layout')).toBe('default-overlay');
 
 					page = new Page({
 						layout: 'not_default',

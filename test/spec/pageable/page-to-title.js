@@ -1,7 +1,7 @@
 define(['lodash', 'pageable/page-to-title'], function(_, pageToTitle){
 	'use strict';
 
-	var page_name = 'foo_bar_code';
+	var page_name = 'foo-bar-code';
 
 	describe('modiphy.pageable.js pageToTitle helper', function(){
 

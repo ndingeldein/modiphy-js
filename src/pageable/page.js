@@ -9,7 +9,7 @@ define(['lodash', 'backbone', 'modiphy', 'pageable/page-to-title'], function(_, 
 
 				content: {},
 				gallery_id: 0,
-				name: 'page_name',
+				name: 'page-name',
 				layout: 'default',
 				type: 'text'
 
@@ -21,12 +21,12 @@ define(['lodash', 'backbone', 'modiphy', 'pageable/page-to-title'], function(_, 
 
 		initialize: function(){
 
-			this.set('navText', this.get('navText') ||pageToTitle(this.get('name')));
+			this.set('navText', this.get('navText') || pageToTitle(this.get('name')));
 
 			this.set('title', this.get('title') || this.get('navText'));
 
 			if( this.isOverlayPage() && this.get('layout') === 'default' ){
-				this.set('layout', 'default_overlay');
+				this.set('layout', 'default-overlay');
 			}
 
 			Backbone.Select.Me.applyTo(this);
